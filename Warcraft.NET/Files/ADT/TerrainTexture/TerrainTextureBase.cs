@@ -10,7 +10,7 @@ namespace Warcraft.NET.Files.ADT.TerrainTexture
         [ChunkOrder(1)]
         public MVER Version { get; set; }
 
-        [ChunkOrder(2)]
+        [ChunkOrder(2), ChunkOptional]
         public MAMP Fred { get; set; }
 
         [ChunkOrder(3), ChunkOptional]
