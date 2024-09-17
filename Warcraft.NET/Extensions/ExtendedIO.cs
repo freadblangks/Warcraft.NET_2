@@ -643,6 +643,9 @@ namespace Warcraft.NET.Extensions
             if (fromBegin)
                 reader.BaseStream.Seek(0, SeekOrigin.Begin);
 
+            if (reader.BaseStream.Position + 4 >= reader.BaseStream.Length)
+                return false;
+
             try
             {
                 var foundChunkSignature = reader.ReadBinarySignature(reverseSignature);
@@ -658,6 +661,9 @@ namespace Warcraft.NET.Extensions
 
                     // Return if we're done reading
                     if (reader.BaseStream.Position == reader.BaseStream.Length)
+                        return false;
+
+                    if(reader.BaseStream.Position + 4 >= reader.BaseStream.Length)
                         return false;
 
                     foundChunkSignature = reader.ReadBinarySignature(reverseSignature);
