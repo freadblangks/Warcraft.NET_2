@@ -219,7 +219,13 @@ namespace Warcraft.NET.Extensions
 
             if (!reader.SeekChunk(chunk.GetSignature(), fromBegin, false, reverseSignature))
             {
+                if(Settings.logLevel == LogLevel.Debug)
+                    Console.WriteLine($"Chunk \"{chunk.GetSignature()}\" not found.");
+
                 if (returnDefault)
+                    return default(T);
+
+                if (!Settings.throwOnMissingChunk)
                     return default(T);
 
                 throw new ChunkSignatureNotFoundException($"Chunk \"{chunk.GetSignature()}\" not found.");
@@ -655,7 +661,12 @@ namespace Warcraft.NET.Extensions
 
                     // Return if we are about to seek outside of range
                     if ((reader.BaseStream.Position + size) > reader.BaseStream.Length)
+                    {
+                        if(Settings.logLevel >= LogLevel.Warning)
+                            Console.WriteLine($"Attempted to seek to offset {reader.BaseStream.Position} which is greater than the buffer size: {reader.BaseStream.Length}");
+
                         return false;
+                    }
 
                     reader.BaseStream.Position += size;
 
