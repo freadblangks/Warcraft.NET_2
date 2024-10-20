@@ -18,6 +18,12 @@ namespace Warcraft.NET.Files.WMO.WorldMapObject
         public MODD Doodads { get; set; } = new();
 
         /// <summary>
+        /// This chunk defines group information.
+        /// </summary>
+        [ChunkOptional]
+        public MOGI GroupInformation { get; set; } = new();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="WorldMapObjectRootBase"/> class.
         /// </summary>
         public WorldMapObjectRootBase() : base()
