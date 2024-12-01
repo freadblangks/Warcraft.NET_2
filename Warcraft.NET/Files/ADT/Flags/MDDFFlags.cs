@@ -41,6 +41,36 @@ namespace Warcraft.NET.Files.ADT.Flags
         /// <summary>
         /// Unknown Flag (Legion)
         /// </summary>
-        Unknown100 = 0x100
+        Unknown100 = 0x100,
+
+        /// <summary>
+        /// Unknown Flag
+        /// </summary>
+        Unknown200 = 0x200,
+
+        /// <summary>
+        /// Unknown Flag
+        /// </summary>
+        Unknown400 = 0x400,
+
+        /// <summary>
+        /// Unknown Flag
+        /// </summary>
+        Unknown800 = 0x800,
+
+        /// <summary>
+        /// Unknown Flag
+        /// </summary>
+        Unknown1000 = 0x1000,
+
+        /// <summary>
+        /// Unknown Flag
+        /// </summary>
+        Unknown2000 = 0x2000,
+
+        /// <summary>
+        /// Unknown Flag
+        /// </summary>
+        Unknown4000 = 0x4000,
     }
 }
