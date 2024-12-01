@@ -30,6 +30,14 @@ namespace Warcraft.NET.Files.ADT.Entries.Wotlk
         /// <summary>
         /// Initializes a new instance of the <see cref="MCINEntry"/> class.
         /// </summary>
+        public MCINEntry()
+        {
+            
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MCINEntry"/> class.
+        /// </summary>
         /// <param name="data">ExtendedData.</param>
         public MCINEntry(byte[] data)
         {
