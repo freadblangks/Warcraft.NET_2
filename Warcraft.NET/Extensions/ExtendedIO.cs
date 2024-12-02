@@ -209,7 +209,7 @@ namespace Warcraft.NET.Extensions
             var signatureBuffer = new char[4];
             for (var i = 0; i < 4; ++i)
             {
-                signatureBuffer[(reverseSignature ? 3 - i : i)] = binaryReader.ReadChar();
+                signatureBuffer[(reverseSignature ? 3 - i : i)] = Convert.ToChar(binaryReader.ReadByte());
             }
 
             var signature = new string(signatureBuffer);
@@ -741,6 +741,9 @@ namespace Warcraft.NET.Extensions
                 var foundChunkSignature = reader.ReadBinarySignature(reverseSignature);
                 while (foundChunkSignature != chunkSignature)
                 {
+                    if (reader.BaseStream.Position + 4 >= reader.BaseStream.Length)
+                        return false;
+
                     var size = reader.ReadUInt32();
 
                     // Return if we are about to seek outside of range
