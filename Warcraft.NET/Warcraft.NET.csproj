@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="SharpCompress" Version="0.29.0" />
-     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.8" />
+     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.9" />
   </ItemGroup>
 
   <ItemGroup>
