@@ -26,7 +26,7 @@ namespace Warcraft.NET.Files.ADT.TerrainTexture
         public MTXF TextureFlags { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TerrainTexture"/> class.
+        /// Initializes a new instance of the <see cref="TerrainTextureBase"/> class.
         /// </summary>
         public TerrainTextureBase() : base()
         {
