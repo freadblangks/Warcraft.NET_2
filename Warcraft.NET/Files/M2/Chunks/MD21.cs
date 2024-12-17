@@ -43,7 +43,7 @@ namespace Warcraft.NET.Files.M2.Chunks
         public List<TextureReplaceStruct> TextureReplace { get; set; }
         public List<RenderFlagStruct> RenderFlags { get; set; }
         public List<BoneLookupTableStruct> BoneLookupTable { get; set; }
-        public List<TextureLookupStruct> TextrueLookup { get; set; }
+        public List<TextureLookupStruct> TextureLookup { get; set; }
         public List<TransparencyLookupStruct> TransparencyLookup { get; set; }
         public List<UVAnimLookupStruct> UVAnimLookup { get; set; }
         public List<BoundingTriangleStruct> BoundingTriangles { get; set; }
@@ -57,6 +57,10 @@ namespace Warcraft.NET.Files.M2.Chunks
         public List<CameraLookupStruct> CameraLookup { get; set; }
         public List<RibbonEmitterStruct> RibbonEmitters { get; set; }
         public List<ParticleEmitterStruct> ParticleEmitters { get; set; }
+
+
+        [Obsolete("Use TextureLookup instead.")]
+        public List<TextureLookupStruct> TextrueLookup { get { return TextureLookup; } set { TextureLookup = value; } }
 
         private byte[] data;
 
@@ -179,7 +183,7 @@ namespace Warcraft.NET.Files.M2.Chunks
                 TextureReplace = ReadStructList<TextureReplaceStruct>(nTexReplace, ofsTexReplace, br);
                 RenderFlags = ReadStructList<RenderFlagStruct>(nRenderFlags, ofsRenderFlags, br);
                 BoneLookupTable = ReadStructList<BoneLookupTableStruct>(nBoneLookupTable, ofsBoneLookupTable, br);
-                TextrueLookup = ReadStructList<TextureLookupStruct>(nTexLookup, ofsTexLookup, br);
+                TextureLookup = ReadStructList<TextureLookupStruct>(nTexLookup, ofsTexLookup, br);
                 TransparencyLookup = ReadStructList<TransparencyLookupStruct>(nTransLookup, ofsTranslookup, br);
                 UVAnimLookup = ReadStructList<UVAnimLookupStruct>(nUVAnimLookup, ofsUVAnimLookup, br);
                 BoundingTriangles = ReadStructList<BoundingTriangleStruct>(nBoundingTriangles, ofsBoundingTriangles, br);
