@@ -44,9 +44,9 @@ namespace Warcraft.NET.Files.WDT.Entries.SL
         public float Intensity { get; set; }
 
         /// <summary>
-        /// Unknown/unused vector3, likely rotation from another struct but unused for point lights.
+        /// Rotation, only used to rotate lightcookies on point lights.
         /// </summary>
-        public Vector3 Unused0 { get; set; } = new Vector3(0.0f, 0.0f, 0.0f);
+        public Vector3 Rotation { get; set; } = new Vector3(0.0f, 0.0f, 0.0f);
 
         /// <summary>
         /// Map Tile X
@@ -65,7 +65,7 @@ namespace Warcraft.NET.Files.WDT.Entries.SL
         public short MLTAIndex { get; set; } = -1;
 
         /// <summary>
-        /// Index to MTEX chunk entry (note: not related to old ADT MTEX)
+        /// Index to MTEX chunk entry containing a lightcookie texture FDID (note: not related to old ADT MTEX)
         /// Default to -1 if not used
         /// </summary>
         public short MTEXIndex { get; set; } = -1;
@@ -105,7 +105,7 @@ namespace Warcraft.NET.Files.WDT.Entries.SL
                     AttenuationStart = br.ReadSingle();
                     AttenuationEnd = br.ReadSingle();
                     Intensity = br.ReadSingle();
-                    Unused0 = br.ReadVector3();
+                    Rotation = br.ReadVector3();
                     TileX = br.ReadUInt16();
                     TileY = br.ReadUInt16();
                     MLTAIndex = br.ReadInt16();
@@ -140,7 +140,7 @@ namespace Warcraft.NET.Files.WDT.Entries.SL
                 bw.Write(AttenuationStart);
                 bw.Write(AttenuationEnd);
                 bw.Write(Intensity);
-                bw.WriteVector3(Unused0);
+                bw.WriteVector3(Rotation);
                 bw.Write(TileX);
                 bw.Write(TileY);
                 bw.Write(MLTAIndex);

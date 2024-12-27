@@ -209,7 +209,7 @@ namespace Warcraft.NET.Extensions
             var signatureBuffer = new char[4];
             for (var i = 0; i < 4; ++i)
             {
-                signatureBuffer[(reverseSignature ? 3 - i : i)] = binaryReader.ReadChar();
+                signatureBuffer[(reverseSignature ? 3 - i : i)] = Convert.ToChar(binaryReader.ReadByte());
             }
 
             var signature = new string(signatureBuffer);
@@ -247,7 +247,13 @@ namespace Warcraft.NET.Extensions
 
             if (!reader.SeekChunk(chunk.GetSignature(), fromBegin, false, reverseSignature))
             {
+                if(Settings.logLevel == LogLevel.Debug)
+                    Console.WriteLine($"Chunk \"{chunk.GetSignature()}\" not found.");
+
                 if (returnDefault)
+                    return default(T);
+
+                if (!Settings.throwOnMissingChunk)
                     return default(T);
 
                 throw new ChunkSignatureNotFoundException($"Chunk \"{chunk.GetSignature()}\" not found.");
@@ -727,21 +733,35 @@ namespace Warcraft.NET.Extensions
             if (fromBegin)
                 reader.BaseStream.Seek(0, SeekOrigin.Begin);
 
+            if (reader.BaseStream.Position + 4 >= reader.BaseStream.Length)
+                return false;
+
             try
             {
                 var foundChunkSignature = reader.ReadBinarySignature(reverseSignature);
                 while (foundChunkSignature != chunkSignature)
                 {
+                    if (reader.BaseStream.Position + 4 >= reader.BaseStream.Length)
+                        return false;
+
                     var size = reader.ReadUInt32();
 
                     // Return if we are about to seek outside of range
                     if ((reader.BaseStream.Position + size) > reader.BaseStream.Length)
+                    {
+                        if(Settings.logLevel >= LogLevel.Warning)
+                            Console.WriteLine($"Attempted to seek to offset {reader.BaseStream.Position} which is greater than the buffer size: {reader.BaseStream.Length}");
+
                         return false;
+                    }
 
                     reader.BaseStream.Position += size;
 
                     // Return if we're done reading
                     if (reader.BaseStream.Position == reader.BaseStream.Length)
+                        return false;
+
+                    if(reader.BaseStream.Position + 4 >= reader.BaseStream.Length)
                         return false;
 
                     foundChunkSignature = reader.ReadBinarySignature(reverseSignature);

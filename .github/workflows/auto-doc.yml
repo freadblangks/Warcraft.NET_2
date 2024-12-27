@@ -11,11 +11,11 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.x.x
+        dotnet-version: 9.x.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish --no-restore -o build --framework net8.0
+      run: dotnet publish --no-restore -o build --framework net9.0
     - name: Automatic documentation
       run: dotnet build/Warcraft.NET.Docs.dll ${{ github.workspace }}/Docs
     - name: Commit & Push changes

@@ -21,7 +21,7 @@ namespace Warcraft.NET.Files.WDT.Light.Legion
         public MPL2 LightTable2 { get { return PointLights2; } set { PointLights2 = value; } }
 
         /// <summary>
-        /// Texture FileDataIDs
+        /// Texture FileDataIDs for lightcookies
         /// </summary>
         [ChunkOrder(4), ChunkOptional]
         public MTEX TextureFileDataIDs { get; set; }
